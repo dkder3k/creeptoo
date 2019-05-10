@@ -1,4 +1,4 @@
-from shift import make_shift
+from src.shift import make_shift
 
 
 def test_hello_lowercase_right_4():

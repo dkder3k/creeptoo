@@ -1,5 +1,5 @@
 from flask import Flask, request
-from shift import make_shift
+from src.shift import make_shift
 
 
 app = Flask(__name__)
