@@ -14,8 +14,3 @@ def make_shift(text, key, direction):
                 shifted_c = chr(ord(shifted_c) - 26)
             char_array[i] = shifted_c
     return "".join(char_array)
-
-
-if __name__ == "__main__":
-    import sys
-    print(make_shift(sys.argv[1], int(sys.argv[2]), sys.argv[3]))

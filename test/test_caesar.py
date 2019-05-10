@@ -1,4 +1,4 @@
-from src.shift import make_shift
+from src.caesar import make_shift
 
 
 def test_hello_lowercase_right_4():
@@ -37,6 +37,7 @@ def test_hello_mixed_right_overflow():
     assert make_shift("Hello", 27, "right") == "Ifmmp"
     assert make_shift("Hello", 53, "right") == "Ifmmp"
     assert make_shift("Hello", 54, "right") == "Jgnnq"
+    assert make_shift("Hello", 120, "right") == "Xubbe"
 
 
 def test_hello_mixed_left_overflow():
