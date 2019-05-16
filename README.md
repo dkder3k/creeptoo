@@ -1,1 +1,1 @@
-Small app for POP* and Gronsfeld ciphers encryption/decryption
+Small app for ROT* and Gronsfeld ciphers encryption/decryption
