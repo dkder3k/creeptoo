@@ -1,22 +1,8 @@
 version: "3.7"
 services:
   app:
-    image: cipher_api:0.1
-    build:
-      context: ./
-      dockerfile: Dockerfile_app
-    container_name: cipher_api
-    expose:
-      - "5000"
-  nginx:
-    image: cipher_nginx:0.1
-    build:
-      context: ./
-      dockerfile: Dockerfile_nginx
-    links:
-      - app
+    image: dkder3k/creeptoo-backend:0.1
+    container_name: creeptoo-backend
     ports:
-      - target: 80
-        published: 8080
-        protocol: tcp
-        mode: host
+      - target: 8080
+        published: 8000
