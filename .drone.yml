@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: golang:1.13.7-alpine3.11
+    commands:
+      - go test ./app-backend/src/ciphers
