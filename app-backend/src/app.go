@@ -17,6 +17,8 @@ func main() {
 
 func rotHandler(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	action, ok := r.URL.Query()["action"]
 	if !ok {
 		http.Error(w, "Action should be specified", http.StatusBadRequest)
@@ -46,6 +48,8 @@ func rotHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func gronsfeldHandler(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	action, ok := r.URL.Query()["action"]
 	if !ok {
