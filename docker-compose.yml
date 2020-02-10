@@ -1,8 +1,14 @@
 version: "3.7"
 services:
   app:
-    image: dkder3k/creeptoo-backend:0.1
+    image: dkder3k/creeptoo-backend:latest
     container_name: creeptoo-backend
     ports:
       - target: 8080
         published: 8000
+  fe:
+    image: dkder3k/creeptoo-frontend:latest
+    container_name: creeptoo-frontend
+    ports:
+      - target: 80
+        published: 8080
