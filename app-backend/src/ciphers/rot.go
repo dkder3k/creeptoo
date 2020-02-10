@@ -2,33 +2,15 @@ package ciphers
 
 import "unicode"
 
-// RotEncrypt - encrypt string using ROT cipher
-func RotEncrypt(plainText string, key uint8) string {
+// Rot - encrypt/decrypt given text with a key
+func Rot(text string, key int, action int) string {
 	key %= 26
 	var result []rune
-	for _, c := range plainText {
+	for _, c := range text {
 		if unicode.IsLetter(c) {
-			shiftedC := rune(uint8(c) + key)
+			shiftedC := rune(int(c) + key * action)
 			if !unicode.IsLetter(shiftedC) {
-				shiftedC = rune(shiftedC - 26)
-			}
-			result = append(result, shiftedC)
-		} else {
-			result = append(result, c)
-		}
-	}
-	return string(result)
-}
-
-// RotDecrypt - decrypt ROT cipher encrypted string
-func RotDecrypt(cipherText string, key uint8) string {
-	key %= 26
-	var result []rune
-	for _, c := range cipherText {
-		if unicode.IsLetter(c) {
-			shiftedC := rune(uint8(c) - key)
-			if !unicode.IsLetter(shiftedC) {
-				shiftedC = rune(shiftedC + 26)
+				shiftedC = rune(int(shiftedC) + 26 * action * -1)
 			}
 			result = append(result, shiftedC)
 		} else {

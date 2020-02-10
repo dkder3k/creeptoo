@@ -5,7 +5,7 @@ import "testing"
 func TestROTEncrypt(t *testing.T) {
 	var tests = []struct {
 		plainText, want string
-		key             uint8
+		key             int
 	}{
 		{"HelLo", "LipPs", 4},
 		{"Hello", "Hello", 0},
@@ -15,7 +15,7 @@ func TestROTEncrypt(t *testing.T) {
 		{"hello w0rld", "olssv d0ysk", 7},
 	}
 	for _, test := range tests {
-		if got := RotEncrypt(test.plainText, test.key); got != test.want {
+		if got := Rot(test.plainText, test.key, ENCRYPT); got != test.want {
 			t.Errorf(`RotEncrypt(%q, %d) expected %q but got %q`, test.plainText, test.key, test.want, got)
 		}
 	}
@@ -24,7 +24,7 @@ func TestROTEncrypt(t *testing.T) {
 func TestROTDecrypt(t *testing.T) {
 	var tests = []struct {
 		cipherText, want string
-		key              uint8
+		key              int
 	}{
 		{"LiPps", "HeLlo", 4},
 		{"Hello", "Hello", 0},
@@ -34,7 +34,7 @@ func TestROTDecrypt(t *testing.T) {
 		{"olssv d0ysk", "hello w0rld", 7},
 	}
 	for _, test := range tests {
-		if got := RotDecrypt(test.cipherText, test.key); got != test.want {
+		if got := Rot(test.cipherText, test.key, DECRYPT); got != test.want {
 			t.Errorf(`RotDecrypt(%q, %d) expected %q but got %q`, test.cipherText, test.key, test.want, got)
 		}
 	}

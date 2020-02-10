@@ -35,13 +35,13 @@ func rotHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	uintKey, _ := strconv.ParseUint(key[0], 10, 8)
+	parsedKey, _ := strconv.ParseInt(key[0], 10, 0)
 
 	switch strings.ToLower(action[0]) {
 	case "encrypt":
-		fmt.Fprintf(w, "%q\n", ciphers.RotEncrypt(text[0], uint8(uintKey)))
+		fmt.Fprintf(w, "%q\n", ciphers.Rot(text[0], int(parsedKey), ciphers.ENCRYPT))
 	case "decrypt":
-		fmt.Fprintf(w, "%q\n", ciphers.RotDecrypt(text[0], uint8(uintKey)))
+		fmt.Fprintf(w, "%q\n", ciphers.Rot(text[0], int(parsedKey), ciphers.DECRYPT))
 	default:
 		http.Error(w, "Allowed actions: encrypt, decrypt", http.StatusBadRequest)
 	}
@@ -69,9 +69,9 @@ func gronsfeldHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch strings.ToLower(action[0]) {
 	case "encrypt":
-		fmt.Fprintf(w, "%q\n", ciphers.GronsfeldEncrypt(text[0], key[0]))
+		fmt.Fprintf(w, "%q\n", ciphers.Gronsfeld(text[0], key[0], ciphers.ENCRYPT))
 	case "decrypt":
-		fmt.Fprintf(w, "%q\n", ciphers.GronsfeldDecrypt(text[0], key[0]))
+		fmt.Fprintf(w, "%q\n", ciphers.Gronsfeld(text[0], key[0], ciphers.DECRYPT))
 	default:
 		http.Error(w, "Allowed actions: encrypt, decrypt", http.StatusBadRequest)
 	}

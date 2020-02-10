@@ -12,7 +12,7 @@ func TestGronsfeldEncrypt(t *testing.T) {
 		{"hello w0rld", "jennp w0tmf", "20221"},
 	}
 	for _, test := range tests {
-		if got := GronsfeldEncrypt(test.plainText, test.key); got != test.want {
+		if got := Gronsfeld(test.plainText, test.key, ENCRYPT); got != test.want {
 			t.Errorf(`GronsfeldEncrypt(%q, %q) expected %q but got %q`, test.plainText, test.key, test.want, got)
 		}
 	}
@@ -28,7 +28,7 @@ func TestGronsfeldDecrypt(t *testing.T) {
 		{"jennp w0tmf", "hello w0rld", "20221"},
 	}
 	for _, test := range tests {
-		if got := GronsfeldDecrypt(test.cipherText, test.key); got != test.want {
+		if got := Gronsfeld(test.cipherText, test.key, DECRYPT); got != test.want {
 			t.Errorf(`GronsfeldDecrypt(%q, %q) expected %q but got %q`, test.cipherText, test.key, test.want, got)
 		}
 	}
