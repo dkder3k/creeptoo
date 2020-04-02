@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: creeptoo-backend-deployment
+  labels:
+    app: crpt-backend
+  namespace: creeptoo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: crpt-backend
+  template:
+    metadata:
+      labels:
+        app: crpt-backend
+    spec:
+      containers:
+      - name: crpt-backend
+        image: dkder3k/creeptoo-backend:0.1
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: creeptoo-backend-service
+  namespace: creeptoo
+spec:
+  selector:
+    app: crpt-backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
