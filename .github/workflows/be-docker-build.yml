@@ -3,6 +3,7 @@ name: Build backend app image
 on:
   push:
     branches: [ master ]
+    paths: [ app-backend/** ]
 
 jobs:
   docker_build:
@@ -18,4 +19,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           path: app-backend
           repository: dkder3k/creeptoo-backend
-          tags: latest, $(date +%s)
+          tag_with_ref: true
