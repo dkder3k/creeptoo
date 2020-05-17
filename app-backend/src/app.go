@@ -26,6 +26,7 @@ func main() {
 
 	router := http.NewServeMux()
 	router.Handle("/api/v1/", apiHandler())
+	router.Handle("/health", health())
 
 	server := &http.Server{
 		Addr:         listenAddr,
@@ -50,6 +51,12 @@ func logging(logger *log.Logger) func(http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 		})
 	}
+}
+
+func health() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+	})
 }
 
 func apiHandler() http.Handler {
@@ -81,14 +88,14 @@ func apiHandler() http.Handler {
 				http.Error(w, err.Error(), http.StatusBadRequest)
 				return
 			}
-			fmt.Fprint(w, rotText)
+			fmt.Fprintln(w, rotText)
 		case "/api/v1/gronsfeld":
 			gronsfeldText, err := gronsfeld(strings.ToLower(action[0]), text[0], strings.ToLower(key[0]))
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusBadRequest)
 				return
 			}
-			fmt.Fprint(w, gronsfeldText)
+			fmt.Fprintln(w, gronsfeldText)
 		default:
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		}
