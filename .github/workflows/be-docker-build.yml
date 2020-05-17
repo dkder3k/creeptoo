@@ -3,7 +3,6 @@ name: Build backend app image
 on:
   push:
     branches: [ master ]
-    paths: [ app-backend/* ]
 
 jobs:
   docker_build:
