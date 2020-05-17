@@ -14,7 +14,7 @@ function transform(action) {
     const cipher = getCipher();
 
     const Http = new XMLHttpRequest();
-    const url = `http://crpt.formyown.xyz/v1/${cipher}?key=${key}&text=${inputText}&action=${action}`;
+    const url = `http://crpt.formyown.xyz/api/v1/${cipher}?key=${key}&text=${inputText}&action=${action}`;
     Http.open("GET", url);
     Http.send();
 
