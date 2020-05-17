@@ -1,0 +1,24 @@
+name: Build frontend app image
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ app-frontend/** ]
+  release:
+    types: [published, created, edited]
+
+jobs:
+  docker_build:
+    name: Build and push image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out git repo
+        uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        name: Build and push creeptoo frontend docker image
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          path: app-frontend
+          repository: dkder3k/creeptoo-frontend
+          tag_with_ref: true
