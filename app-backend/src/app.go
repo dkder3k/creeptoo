@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,7 +13,12 @@ import (
 	"./ciphers"
 )
 
+var listenAddr string
+
 func main() {
+
+	flag.StringVar(&listenAddr, "listen-addr", ":8000", "Address to listen")
+	flag.Parse()
 
 	logger := log.New(os.Stdout, "crpt: ", log.LstdFlags)
 	logger.Println("Server starting...")
@@ -22,7 +28,7 @@ func main() {
 	router.Handle("/v1/gronsfeld", gronsfeldHandler())
 
 	server := &http.Server{
-		Addr:         ":8080",
+		Addr:         listenAddr,
 		Handler:      logging(logger)(router),
 		ErrorLog:     logger,
 		ReadTimeout:  5 * time.Second,
