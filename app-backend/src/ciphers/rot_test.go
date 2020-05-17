@@ -21,12 +21,6 @@ func TestROTEncrypt(t *testing.T) {
 	}
 }
 
-func BenchmarkROTEncrypt(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Rot("hello w0rld", 7, ENCRYPT)
-	}
-}
-
 func TestROTDecrypt(t *testing.T) {
 	var tests = []struct {
 		cipherText, want string
@@ -43,11 +37,5 @@ func TestROTDecrypt(t *testing.T) {
 		if got := Rot(test.cipherText, test.key, DECRYPT); got != test.want {
 			t.Errorf(`RotDecrypt(%q, %d) expected %q but got %q`, test.cipherText, test.key, test.want, got)
 		}
-	}
-}
-
-func BenchmarkROTDecrypt(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Rot("olssv d0ysk", 7, DECRYPT)
 	}
 }
