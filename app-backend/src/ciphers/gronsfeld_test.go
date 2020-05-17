@@ -18,12 +18,6 @@ func TestGronsfeldEncrypt(t *testing.T) {
 	}
 }
 
-func BenchmarkGronsfeldEncrypt(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Gronsfeld("hello w0rld", "20221", ENCRYPT)
-	}
-}
-
 func TestGronsfeldDecrypt(t *testing.T) {
 	var tests = []struct {
 		cipherText, want, key string
@@ -37,11 +31,5 @@ func TestGronsfeldDecrypt(t *testing.T) {
 		if got := Gronsfeld(test.cipherText, test.key, DECRYPT); got != test.want {
 			t.Errorf(`GronsfeldDecrypt(%q, %q) expected %q but got %q`, test.cipherText, test.key, test.want, got)
 		}
-	}
-}
-
-func BenchmarkGronsfeldDecrypt(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Gronsfeld("jennp w0tmf", "20221", DECRYPT)
 	}
 }
