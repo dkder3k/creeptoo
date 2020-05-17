@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: crpt-frontend
-        image: dkder3k/creeptoo-frontend:0.1.1
+        image: dkder3k/creeptoo-frontend:latest
         ports:
         - containerPort: 80
 

@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
       - name: crpt-backend
-        image: dkder3k/creeptoo-backend:0.1
+        image: dkder3k/creeptoo-backend:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
 
 ---
 apiVersion: v1
@@ -33,5 +33,5 @@ spec:
     app: crpt-backend
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8000
+      targetPort: 8000

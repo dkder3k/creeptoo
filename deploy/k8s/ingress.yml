@@ -15,8 +15,8 @@ spec:
       paths:
       - backend:
           serviceName: creeptoo-backend-service
-          servicePort: 8080
-        path: /v1
+          servicePort: 8000
+        path: /api/v1
       - backend:
           serviceName: creeptoo-frontend-service
           servicePort: 80
