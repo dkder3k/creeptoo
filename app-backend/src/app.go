@@ -20,6 +20,7 @@ func main() {
 
 	router := http.NewServeMux()
 	router.Handle("/api/v1/", apiV1Handler())
+	router.Handle("/api/v2/", apiV2Handler())
 	router.Handle("/health", health())
 
 	server := &http.Server{

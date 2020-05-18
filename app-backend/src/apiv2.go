@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 	"strconv"
 	"strings"
 )
 
-func apiV1Handler() http.Handler {
+func apiV2Handler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
 
 		action, ok := r.URL.Query()["action"]
 		if !ok {
@@ -29,21 +30,35 @@ func apiV1Handler() http.Handler {
 
 
 		switch r.URL.Path {
-		case "/api/v1/rot":
+		case "/api/v2/rot":
 			parsedKey, _ := strconv.ParseInt(key[0], 10, 0)
 			rotText, err := rot(strings.ToLower(action[0]), text[0], int(parsedKey))
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			fmt.Fprintln(w, rotText)
-		case "/api/v1/gronsfeld":
+
+			response := map[string]string{
+				"cipher": "ROT*",
+				"action": strings.ToLower(action[0]),
+				"text": text[0],
+				"result": rotText,
+			}
+			json.NewEncoder(w).Encode(response)
+		case "/api/v2/gronsfeld":
 			gronsfeldText, err := gronsfeld(strings.ToLower(action[0]), text[0], strings.ToLower(key[0]))
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			fmt.Fprintln(w, gronsfeldText)
+
+			response := map[string]string{
+				"cipher": "Gronsfeld cipher",
+				"action": strings.ToLower(action[0]),
+				"text": text[0],
+				"result": gronsfeldText,
+			}
+			json.NewEncoder(w).Encode(response)
 		default:
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		}
