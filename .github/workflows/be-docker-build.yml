@@ -21,7 +21,7 @@ jobs:
       - name: Get dependencies
         run: go get -v -t -d ./...
       - name: Test
-        run: go test -v .
+        run: go test -v ./app-backend/src/...
 
   docker_build:
     name: Build and push image to Docker Hub
